@@ -36,8 +36,43 @@ function Alfanum() {
   const fetchData = async () => {
     try {
       const res = await axios.get(`/api/searchalf/${code}`);
-      setResponse(res.data[0]);
-      toast.success("Registro encontrado"); // Agregado aquí
+
+      if (res.data && res.data.length > 0) {
+        setResponse(res.data[0]);
+        toast.success("Registro encontrado");
+      } else {
+        // Si la respuesta está vacía, muestra un error
+        toast(
+          <div>
+            <b>Dni no encontrado</b>
+            <p>Debe inscribirse en una de estas opciones</p>
+            <Button
+              className="mt-2  text-xs"
+              onClick={() =>
+                (window.location.href = "https://form-pucallpa-1.vercel.app/")
+              }
+            >
+              S.Publico
+            </Button>
+            <Button
+              className="mt-2 ml-2 text-xs"
+              onClick={() =>
+                (window.location.href = "https://form-pucallpa-2.vercel.app/")
+              }
+            >
+              Emp-Prof-Est
+            </Button>
+            <Button
+              className="mt-2 ml-2 text-xs"
+              onClick={() =>
+                (window.location.href = "https://form-pucallpa-3.vercel.app/")
+              }
+            >
+              I.Especial
+            </Button>
+          </div>
+        );
+      }
     } catch (error) {
       console.error("Error al buscar datos:", error);
     }
@@ -76,34 +111,34 @@ function Alfanum() {
                 </div>
               </div>
             </div>
-            {response && (
-              <div className="grid gap-2 py-2">
-                <div className="grid grid-cols-3 items-center gap-4">
-                  <Label htmlFor="firstName" className="text-right">
-                    Nombre:
-                  </Label>
-                  <Label htmlFor="firstName" className="text-left col-span-2">
-                    {response?.nombres || "Esperando datos..."}
-                  </Label>
-                </div>
-                <div className="grid grid-cols-3 items-center gap-4">
-                  <Label htmlFor="lastName" className="text-right">
-                    Apellido:
-                  </Label>
-                  <Label htmlFor="lastName" className="text-left col-span-2">
-                    {response?.apellidos || "Esperando datos..."}
-                  </Label>
-                </div>
-                <div className="grid grid-cols-3 items-center gap-4">
-                  <Label htmlFor="dni" className="text-right">
-                    DNI/CE:
-                  </Label>
-                  <Label htmlFor="dni" className="text-left col-span-2">
-                    {response?.dni || "Esperando datos..."}
-                  </Label>
-                </div>
+
+            <div className="grid gap-2 py-2">
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="firstName" className="text-right">
+                  Nombre:
+                </Label>
+                <Label htmlFor="firstName" className="text-left col-span-2">
+                  {response?.nombres || "Esperando datos..."}
+                </Label>
               </div>
-            )}
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="lastName" className="text-right">
+                  Apellido:
+                </Label>
+                <Label htmlFor="lastName" className="text-left col-span-2">
+                  {response?.apellidos || "Esperando datos..."}
+                </Label>
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="dni" className="text-right">
+                  DNI/CE:
+                </Label>
+                <Label htmlFor="dni" className="text-left col-span-2">
+                  {response?.dni || "Esperando datos..."}
+                </Label>
+              </div>
+            </div>
+
             <DrawerFooter>
               <Button
                 className="mb-4"
