@@ -137,6 +137,14 @@ function Alfanum() {
                   {response?.dni || "Esperando datos..."}
                 </Label>
               </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="tipo" className="text-right">
+                  Tipo:
+                </Label>
+                <Label htmlFor="tipo" className="text-left col-span-2">
+                  {response?.tipo || "Esperando datos..."}
+                </Label>
+              </div>
             </div>
 
             <DrawerFooter>

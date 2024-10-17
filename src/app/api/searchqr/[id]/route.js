@@ -4,7 +4,7 @@ import { conn } from "@/app/libs/mysql";
 export async function GET(request, { params }) {
   try {
     const result = await conn.query(
-      "SELECT nombres, apellidos, dni FROM asistencia WHERE alfanum = ?",
+      "SELECT nombres, apellidos, dni, tipo FROM asistencia WHERE alfanum = ?",
       [params.id]
     );
     if (result.length === 0) {
