@@ -109,7 +109,7 @@ function Reader({ onScan }) {
       <div
         style={{
           position: "absolute",
-          top: "35%",
+          top: "33.7%",
           left: "50%",
           width: "40%",
           height: "35%",
